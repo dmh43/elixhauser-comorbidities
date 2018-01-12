@@ -22,7 +22,7 @@ with
 icd as
 (
   select patient.patienthealthsystemstayid
-    , cast(diagnosisicd9code as char(5)) as icd9code
+    , cast(diagnosis.icd9code as char(5)) as icd9code
   from patient, diagnosis
 )
 ,
