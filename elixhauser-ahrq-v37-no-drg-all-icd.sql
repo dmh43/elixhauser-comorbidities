@@ -537,7 +537,7 @@ select adm.patienthealthsystemstayid
 , case when psych = 1 then 1 else 0 end as PSYCHOSES
 , case when depress = 1 then 1 else 0 end as DEPRESSION
 
-from admissionsdx adm
+from admissiondx adm
 left join eligrp eli
   on adm.patienthealthsystemstayid = eli.patienthealthsystemstayid
 order by adm.patienthealthsystemstayid;
