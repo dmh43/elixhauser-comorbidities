@@ -464,9 +464,7 @@ group by patienthealthsystemstayid
 -- now merge these flags together to define elixhauser
 -- most are straightforward.. but hypertension flags are a bit more complicated
 
--- NOTE: NOT USING SUBJECT_ID HERE! If an equivalent exists, please use it!
--- select adm.subject_id, adm.patienthealthsystemstayid
-select adm.patienthealthsystemstayid
+select pat.uniquepid, pat.patienthealthsystemstayid
 , case
     when chf     = 1 then 1
     when htnwchf = 1 then 1
@@ -537,7 +535,7 @@ select adm.patienthealthsystemstayid
 , case when psych = 1 then 1 else 0 end as PSYCHOSES
 , case when depress = 1 then 1 else 0 end as DEPRESSION
 
-from admissiondx adm
+from patient pat
 left join eligrp eli
-  on adm.patienthealthsystemstayid = eli.patienthealthsystemstayid
-order by adm.patienthealthsystemstayid;
+  on pat.patienthealthsystemstayid = eli.patienthealthsystemstayid
+order by pat.patienthealthsystemstayid;
