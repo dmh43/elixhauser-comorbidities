@@ -28,15 +28,6 @@ icd9:
 	@echo '-------------------'
 	@echo ''
 	@sleep 2
-	PGPASSWORD=$(DBPASS) psql -v lim=10000 "dbname=${DBNAME} options=--search_path=${DBSCHEMA}" -f elixhauser-ahrq-v37-no-drg-all-icd.sql --username="$(DBUSER)" --host="$(DBHOST)"
-
-icd9-limit:
-	@echo ''
-	@echo '-------------------'
-	@echo '-- Generating ICD9 View --'
-	@echo '-------------------'
-	@echo ''
-	@sleep 2
-	PGPASSWORD=$(DBPASS) psql -v lim=10000 "dbname=${DBNAME} options=--search_path=${DBSCHEMA}" -f elixhauser-ahrq-v37-no-drg-all-icd.sql --username="$(DBUSER)" --host="$(DBHOST)"
+	PGPASSWORD=$(DBPASS) psql "dbname=${DBNAME} options=--search_path=${DBSCHEMA}" -f elixhauser-ahrq-v37-no-drg-all-icd.sql --username="$(DBUSER)" --host="$(DBHOST)"
 
 .PHONY: help eicu

@@ -23,7 +23,8 @@ icd as
 (
   select patient.patienthealthsystemstayid
     , cast(diagnosis.icd9code as char(5)) as icd9code
-  from patient, diagnosis
+  from patient inner join diagnosis on patient.patientUnitStayID = diagnosis.patientUnitStayID
+  where icd9code <> ''
 )
 ,
 eliflg as
@@ -535,7 +536,7 @@ select pat.uniquepid, pat.patienthealthsystemstayid
 , case when psych = 1 then 1 else 0 end as PSYCHOSES
 , case when depress = 1 then 1 else 0 end as DEPRESSION
 
-from patient pat limit :lim
+from patient pat
 left join eligrp eli
   on pat.patienthealthsystemstayid = eli.patienthealthsystemstayid
 order by pat.patienthealthsystemstayid;
